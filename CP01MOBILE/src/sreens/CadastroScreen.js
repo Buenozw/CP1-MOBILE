@@ -1,79 +1,95 @@
-import React, { useState } from "react";
-import { SafeAreaView, View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {View,TextInput,Button,tyleSheet,Alert,Text} from "react-native";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaskedTextInput } from "react-native-mask-text";
 
 export default function CadastroScreen({ navigation }) {
   const [nome, setNome] = useState("");
-  const [curso, setCurso] = useState("");
-  const [disciplina, setDisciplina] = useState("");
-  const [descricao, setDescricao] = useState("");
+  const [rm, setRm] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [cpf, setCpf] = useState("");
 
-  function enviarFormulario() {
-    const dados = { nome, curso, disciplina, descricao };
-    navigation.navigate("Perfil", { dados });
-  }
+  useEffect(() => {
+    async function carregarDados() {
+      const dados = await AsyncStorage.getItem("usuario");
+
+      if (dados) {
+        const usuario = JSON.parse(dados);
+
+        setNome(usuario.nome);
+        setRm(usuario.rm);
+        setTelefone(usuario.telefone);
+        setCpf(usuario.cpf);
+      }
+    }
+    carregarDados();
+  }, []);
+
+  const salvar = async () => {
+    if (!nome || !rm || !telefone || !cpf) {
+      Alert.alert("Erro", "Preencha todos os campos!");
+      return;
+    }
+
+    const usuario = { nome, rm, telefone, cpf };
+    await AsyncStorage.setItem("usuario", JSON.stringify(usuario));
+    navigation.navigate("Perfil", usuario);
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.card}>
-          <Text style={styles.titulo}>Cadastro CP01</Text>
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro</Text>
 
-          <View style={styles.campo}>
-            <Text style={styles.label}>Nome</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Digite seu nome"
-              placeholderTextColor="#8f98a0ff"
-              value={nome}
-              onChangeText={setNome}
-            />
-          </View>
+      <TextInput
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+        style={styles.input}
+      />
 
-          <View style={styles.campo}>
-            <Text style={styles.label}>Curso</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Digite seu curso"
-              placeholderTextColor="#9aa0a6"
-              value={curso}
-              onChangeText={setCurso}
-            />
-          </View>
+      <TextInput
+        placeholder="RM"
+        value={rm}
+        onChangeText={setRm}
+        style={styles.input}
+      />
 
-          <View style={styles.campo}>
-            <Text style={styles.label}>Disciplina</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Digite a disciplina"
-              placeholderTextColor="#9aa0a6"
-              value={disciplina}
-              onChangeText={setDisciplina}
-            />
-          </View>
+      <MaskedTextInput
+        mask="(99) 99999-9999"
+        placeholder="Telefone"
+        value={telefone}
+        onChangeText={(text, rawText) => setTelefone(text)}
+        style={styles.input}
+      />
 
-          <View style={styles.campo}>
-            <Text style={styles.label}>Descrição</Text>
-            <TextInput
-              style={[styles.input, styles.inputDescricao]}
-              placeholder="Fale um pouco sobre você(2 a 3 linhas)"
-              placeholderTextColor="#9aa0a6"
-              value={descricao}
-              onChangeText={setDescricao}
-              multiline={true}
-              numberOfLines={4}
-              textAlignVertical="top"
-            />
-          </View>
+      <MaskedTextInput
+        mask="999.999.999-99"
+        placeholder="CPF"
+        value={cpf}
+        onChangeText={(text, rawText) => setCpf(text)}
+        style={styles.input}
+      />
 
-          <TouchableOpacity style={styles.botao} onPress={enviarFormulario}>
-            <Text style={styles.textoBotao}>Enviar Cadastro</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Button title="Salvar" onPress={salvar} />
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
-  
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20
+  },
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: "center"
+  },
+  input: {
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+    borderRadius: 5
+  }
 });

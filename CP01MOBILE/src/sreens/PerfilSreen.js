@@ -1,39 +1,40 @@
 import React from "react";
-import { View, Text, SafeAreaView, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 export default function PerfilScreen({ route }) {
-  const { dados } = route.params;
+  const { nome, rm, telefone, cpf } = route.params;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.cardResultado}>
-          <Text style={styles.resultadoTitulo}>Perfil do Aluno</Text>
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Perfil</Text>
 
-          <View style={styles.resultadoLinha}>
-            <Text style={styles.resultadoLabel}>Nome:</Text>
-            <Text style={styles.resultadoTexto}>{dados.nome}</Text>
-          </View>
+      <Image
+        source={{ uri: "https://i.pravatar.cc/150" }}
+        style={styles.foto}
+      />
 
-          <View style={styles.resultadoLinha}>
-            <Text style={styles.resultadoLabel}>Curso:</Text>
-            <Text style={styles.resultadoTexto}>{dados.curso}</Text>
-          </View>
-
-          <View style={styles.resultadoLinha}>
-            <Text style={styles.resultadoLabel}>Disciplina:</Text>
-            <Text style={styles.resultadoTexto}>{dados.disciplina}</Text>
-          </View>
-
-          <View style={styles.resultadoLinha}>
-            <Text style={styles.resultadoLabel}>Descrição:</Text>
-            <Text style={styles.resultadoTexto}>{dados.descricao}</Text>
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Text>Nome: {nome}</Text>
+      <Text>RM: {rm}</Text>
+      <Text>Telefone: {telefone}</Text>
+      <Text>CPF: {cpf}</Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20
+  },
+  foto: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 20
+  }
 });
