@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {View,TextInput,Button,tyleSheet,Alert,Text} from "react-native";
-
+import React, { useEffect, useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaskedTextInput } from "react-native-mask-text";
 

@@ -12,7 +12,6 @@ export default function PerfilScreen({ route }) {
         source={{ uri: "https://i.pravatar.cc/150" }}
         style={styles.foto}
       />
-
       <Text>Nome: {nome}</Text>
       <Text>RM: {rm}</Text>
       <Text>Telefone: {telefone}</Text>

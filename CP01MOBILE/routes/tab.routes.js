@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CadastroScreen from "../src/sreens/CadastroScreen";
-import PerfilScreen from "../src/sreens/PerfilSreen";
+import CadastroScreen from "../src/screens/CadastroScreen";
+import PerfilScreen from "../src/screens/PerfilScreen";
 
 const Tab = createBottomTabNvaigator()
 
