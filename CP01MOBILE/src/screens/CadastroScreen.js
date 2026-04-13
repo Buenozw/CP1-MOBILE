@@ -52,13 +52,14 @@ export default function CadastroScreen({ navigation }) {
         value={rm}
         onChangeText={setRm}
         style={styles.input}
+        keyboardType="numeric"
       />
 
       <MaskedTextInput
         mask="(99) 99999-9999"
         placeholder="Telefone"
         value={telefone}
-        onChangeText={(text, rawText) => setTelefone(text)}
+        onChangeText={(text) => setTelefone(text)}
         style={styles.input}
       />
 
@@ -66,7 +67,7 @@ export default function CadastroScreen({ navigation }) {
         mask="999.999.999-99"
         placeholder="CPF"
         value={cpf}
-        onChangeText={(text, rawText) => setCpf(text)}
+        onChangeText={(text) => setCpf(text)}
         style={styles.input}
       />
 
