@@ -9,7 +9,7 @@ export default function Perfil({ route }) {
       <Text style={styles.titulo}>Perfil</Text>
 
       <Image
-        source={{ uri: "https://i.pravatar.cc/150" }}
+        source={{ uri: "https://avatars.githubusercontent.com/u/202713469?s=400&u=42170edb8f870f09df2b03028113cdcebfdb0148&v=4" }}
         style={styles.foto}
       />
       <Text>Nome: {nome}</Text>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   foto: {
     width: 120,
     height: 120,
-    borderRadius: 60,
+    borderRadius: 60, 
     marginBottom: 20
   }
 });
