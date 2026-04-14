@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
-export default function PerfilScreen({ route }) {
+export default function Perfil({ route }) {
   const { nome, rm, telefone, cpf } = route.params;
 
   return (

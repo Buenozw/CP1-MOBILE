@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaskedTextInput } from "react-native-mask-text";
 
-export default function CadastroScreen({ navigation }) {
+export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState("");
   const [rm, setRm] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -40,31 +40,27 @@ export default function CadastroScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.titulo}>Cadastro</Text>
 
-      <TextInput
-        placeholder="Nome"
+      <TextInput placeholder="Nome"
         value={nome}
         onChangeText={setNome}
         style={styles.input}
       />
 
-      <TextInput
-        placeholder="RM"
+      <TextInput placeholder="RM"
         value={rm}
         onChangeText={setRm}
         style={styles.input}
         keyboardType="numeric"
       />
 
-      <MaskedTextInput
-        mask="(99) 99999-9999"
+      <MaskedTextInput mask="(99) 99999-9999"
         placeholder="Telefone"
         value={telefone}
         onChangeText={(text) => setTelefone(text)}
         style={styles.input}
       />
 
-      <MaskedTextInput
-        mask="999.999.999-99"
+      <MaskedTextInput mask="999.999.999-99"
         placeholder="CPF"
         value={cpf}
         onChangeText={(text) => setCpf(text)}
